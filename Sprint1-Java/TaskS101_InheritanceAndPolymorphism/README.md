@@ -1,4 +1,4 @@
-#Sprint 1 Task 1: Inheritance and Polymorphism 
+# Sprint 1 Task 1: Inheritance and Polymorphism 
 
 1. Use Eclipse or IntelliJ for all exercises
 

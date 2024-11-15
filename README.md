@@ -51,7 +51,7 @@ The mentor will be your trusted person who will guide you throughout your learni
 
 During the course, you will use different tools that will allow you to communicate with mentors, technical staff, and other students. They are as follows:
 
-1. **Discord: **This is the IT Academy community platform. You can hold meetings, individual chats, group chats, and video calls. You will also be able to stay updated and engage in discussions in specific channels related to each topic.
+1. **Discord:** This is the IT Academy community platform. You can hold meetings, individual chats, group chats, and video calls. You will also be able to stay updated and engage in discussions in specific channels related to each topic.
 
 2. **Microsoft Teams – Virtual Classroom:** If you are taking the course remotely, the virtual classroom is where you can find your mentor and other classmates online during the scheduled course hours. Here, you can ask questions and listen to explanations from your mentor.
 
