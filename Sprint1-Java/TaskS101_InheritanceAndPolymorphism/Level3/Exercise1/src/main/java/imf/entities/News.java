@@ -4,7 +4,7 @@ public abstract class News {
     private String headline;
     private String text;
     private float price;
-    private int rating;
+    private short rating;
     private Journalist journalist;
 
     public News(String headline, Journalist journalist) {
@@ -60,7 +60,7 @@ public abstract class News {
                 ", rating:" + this.rating;
     }
 
-    public abstract int calculateArticlePrice();
+    public abstract float calculateArticlePrice();
 
-    public abstract int calculateRatingNews();
+    public abstract short calculateNewsRating();
 }
