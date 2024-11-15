@@ -7,11 +7,11 @@ public abstract class Instruments {
     public Instruments(String name, float price) {
         this.name = name;
         this.price = price;
-        System.out.println("Class loaded from the superclass constructor: " + this.getClass();
+        System.out.println("Class loaded from the superclass constructor: " + this.getClass());
     }
 
     static {
-        System.out.println("Class loaded from a static initialisation block of the superclass: " + this.getClass());
+        System.out.println("Class loaded from a static initialisation block of the superclass: " + Instruments.class);
     }
 
     public String getName() {
