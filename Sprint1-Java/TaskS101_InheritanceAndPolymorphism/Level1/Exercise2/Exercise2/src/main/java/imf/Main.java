@@ -1,6 +1,6 @@
-package org;
+package imf;
 
-import org.app.App;
+import imf.app.App;
 
 public class Main {
     public static void main(String[] args) {
