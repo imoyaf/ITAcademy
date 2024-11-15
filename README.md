@@ -4,6 +4,7 @@
 
 ## Individual specialisation with mentorship
 <br/>
+
 ### Objectives of the specialisation
 
 This phase has two main objectives:
@@ -13,6 +14,7 @@ This phase has two main objectives:
 2. **Master your technology stack.** To apply for junior positions (Frontend, Backend, Full Stack, Data Scientist, etc.), you will need to master a set of programming languages and tools. In this phase, you will learn the minimum essentials to join a development team as a junior member with confidence.
 
 <br/>
+
 ### Methodology
 
 **Flipped Classroom.** The mentor will be your reference point and will guide you throughout your autonomous learning, establishing a close and trusting relationship.
@@ -36,6 +38,7 @@ In addition to these four tasks, a fifth responsibility is added, which is to gi
 The mentor will be your trusted person who will guide you throughout your learning process. As you progress through each sprint, the support you receive will change so that you gain autonomy and reduce your dependency. In no case will the mentor provide the answers or solutions to your tasks.
 
 <br/>
+
 ### Achievements and Skills
 
 **Achievements:** By the end of the course, you should have the maximum level of autonomy as a software developer.
@@ -43,6 +46,7 @@ The mentor will be your trusted person who will guide you throughout your learni
 **Skills:** During the sprints, you will need to learn how to learn, increase your resilience, structure a project in the chosen technology, and defend the technical decisions you make.
 
 <br/>
+
 ### Course Organization
 
 During the course, you will use different tools that will allow you to communicate with mentors, technical staff, and other students. They are as follows:
@@ -57,6 +61,7 @@ During the course, you will use different tools that will allow you to communica
 
 
 <br/>
+
 ### Sprint Content
 
 Within each sprint, you will find:
@@ -72,6 +77,7 @@ Within each sprint, you will find:
 It is not necessary to view all the proposed content. Only do so if you are unable to complete the task. If you want to consult other technical resources on the web, books, etc., feel free to do so. In fact, we encourage it!
 
 <br/>
+
 ### Task Levels
 
 At the end of each sprint, you must have submitted all the tasks.
@@ -85,6 +91,8 @@ Level 1 is the minimum essential requirement, while levels 2 and 3 expand on the
 Once you’ve submitted an exercise or task, the mentor will correct it with technical comments through the platform. Often, the mentor will ask for improvements on critical aspects of the exercise and may request a new submission.
 
 You should aim to complete all levels of all tasks within the assigned time, thereby assimilating the broadest range of technical knowledge.
+
+<br/>
 
 ### Checkpoints
 
