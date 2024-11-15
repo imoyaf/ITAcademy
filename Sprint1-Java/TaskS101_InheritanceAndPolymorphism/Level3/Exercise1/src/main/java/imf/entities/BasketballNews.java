@@ -35,11 +35,11 @@ public class BasketballNews extends News {
     }
 
     public short calculateNewsRating() {
-        short puntsNoticia = 4;
-        puntsNoticia += (this.competition.equalsIgnoreCase("EuroLeague")) ? (short)3 : 0;
-        puntsNoticia += (this.competition.equalsIgnoreCase("ACB")) ? (short)2 : 0;
-        puntsNoticia += (this.club.equalsIgnoreCase("Barça") || this.club.equalsIgnoreCase("Madrid")) ? (short)1 : 0;
+        short newsRating = 4;
+        newsRating += (this.competition.equalsIgnoreCase("EuroLeague")) ? (short)3 : 0;
+        newsRating += (this.competition.equalsIgnoreCase("ACB")) ? (short)2 : 0;
+        newsRating += (this.club.equalsIgnoreCase("Barça") || this.club.equalsIgnoreCase("Madrid")) ? (short)1 : 0;
 
-        return puntsNoticia;
+        return newsRating;
     }
 }
