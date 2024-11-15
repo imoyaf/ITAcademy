@@ -5,9 +5,9 @@
 ## Exercise 1
 
 
-In a sports news editorial, the news is classified by sports: football, basketball, tennis, F1, and motocross.
+In a sports news desk, the news is classified by sports: football, basketball, tennis, F1, and motocross.
 
-The editorial can have more than one writer, and for each of them, we want to know their name, ID number, and salary. Once an ID number is assigned, it cannot be changed. All writers have the same salary, and if in the future the company increases the salary, it will apply equally to everyone. For now, the current salary is €1500.
+The desk can have more than one writer, and for each of them, we want to know their name, ID number, and salary. Once an ID number is assigned, it cannot be changed. All writers have the same salary, and if in the future the company increases the salary, it will apply equally to everyone. For now, the current salary is €1500.
 
 Each writer can work on more than one article. Articles must have a title, text, a rating, and a price. When an article is created, the text should be empty.
 
@@ -55,7 +55,7 @@ Example: An article about a goal by Ferran Torres of Barça in the Champions Lea
     Initial price: €100
     Honda or Yamaha: €50
 
-To calculate the ratings of the articles, the following criteria are used:
+To calculate the rating of the articles, the following criteria are used:
 
 **Football articles:**
 
