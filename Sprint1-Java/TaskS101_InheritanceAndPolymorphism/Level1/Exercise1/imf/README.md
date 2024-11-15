@@ -13,15 +13,3 @@ All instruments have as attributes their name and price. Additionally, they have
 The class loading process only occurs once. Demonstrate that the loading can be triggered either by creating the first instance of the class or by accessing a static member of the class.
 
 Look up information about initialization blocks and static blocks in Java.
-
-<br/>
-
-## Exercise 2
-
-<br/>
-
-Create a class "Car" with the attributes: brand, model, and power. The brand should be static and final, the model should be static, and the power should be final. Demonstrate the difference between the three. Is there any that can be initialized in the class constructor?
-
-Add two methods to the "Car" class: a static method called brake() and a non-static method called accelerate(). The accelerate() method should display in the console: "The vehicle is accelerating" and the brake() method should display: "The vehicle is braking".
-
-Demonstrate how to invoke both the static and non-static methods from the main() method in the main class.
