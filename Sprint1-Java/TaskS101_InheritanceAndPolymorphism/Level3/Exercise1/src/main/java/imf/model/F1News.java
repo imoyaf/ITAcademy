@@ -1,4 +1,4 @@
-package imf.entities;
+package imf.model;
 
 public class F1News extends News {
     private String team;

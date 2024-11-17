@@ -1,4 +1,4 @@
-package imf.entities;
+package imf.model;
 
 public abstract class News {
     private String headline;

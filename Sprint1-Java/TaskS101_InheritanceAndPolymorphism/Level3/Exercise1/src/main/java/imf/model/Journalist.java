@@ -1,4 +1,4 @@
-package imf.entities;
+package imf.model;
 
 import java.util.ArrayList;
 import java.util.List;

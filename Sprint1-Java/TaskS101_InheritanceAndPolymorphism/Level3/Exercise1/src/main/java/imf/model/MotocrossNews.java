@@ -1,4 +1,4 @@
-package imf.entities;
+package imf.model;
 
 public class MotocrossNews extends News {
     private String team;

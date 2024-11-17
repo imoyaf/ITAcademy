@@ -1,4 +1,4 @@
-package imf.entities;
+package imf.model;
 
 public class FootballNews extends News {
     private String competition;
