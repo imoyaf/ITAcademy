@@ -6,7 +6,7 @@ import static imf.controller.MenuController.journalists;
 
 public class MenuUtils {
 
-    public static boolean idFound(String id) {
+    public boolean idFound(String id) {
         boolean idFound = false;
         int i = 0;
         while (i < journalists.size() && !idFound) {
@@ -18,7 +18,7 @@ public class MenuUtils {
         return idFound;
     }
 
-    public static Journalist findJournalist(String id) {
+    public Journalist findJournalist(String id) {
         Journalist journalist = null;
         for (Journalist element : journalists) {
             if (element.getId().equalsIgnoreCase(id)) {

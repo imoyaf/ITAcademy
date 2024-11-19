@@ -37,9 +37,7 @@ public class Journalist {
 
     @Override
     public String toString() {
-        return "Journalist\n"
-                + "Name: " + this.name + "\n"
-                + "Id: " + this.id + "\n"
-                + "News: \n" + this.news.toString();
+        return "Journalist name: " + this.name + ", Id: " + this.id + ", Salary: " + SALARY
+                + ", News: " + this.news.toString();
     }
 }

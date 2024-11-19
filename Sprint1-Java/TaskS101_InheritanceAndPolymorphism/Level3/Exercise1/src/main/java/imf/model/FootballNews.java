@@ -39,7 +39,7 @@ public class FootballNews extends News {
     public float calculateArticlePrice() {
         float articlePrice = 300;
         articlePrice += (this.competition.equalsIgnoreCase("Champions League")) ? 100F : 0;
-        articlePrice += (this.club.equalsIgnoreCase("Barça") || this.club.equalsIgnoreCase("Madrid")) ? 100F : 0;
+        articlePrice += (this.club.equalsIgnoreCase("FC Barcelona") || this.club.equalsIgnoreCase("Madrid")) ? 100F : 0;
         articlePrice += (this.player.equalsIgnoreCase("Ferran Torres")
                 || this.player.equalsIgnoreCase("Benzema")) ? 50F : 0;
 
@@ -49,8 +49,8 @@ public class FootballNews extends News {
     public short calculateNewsRating() {
         short newsRating = 5;
         newsRating += (this.competition.equalsIgnoreCase("Champions League")) ? (short)3 : 0;
-        newsRating += (this.competition.equalsIgnoreCase("La Liga")) ? (short)2 : 0;
-        newsRating += (this.club.equalsIgnoreCase("Barça")
+        newsRating += (this.competition.equalsIgnoreCase("Primera")) ? (short)2 : 0;
+        newsRating += (this.club.equalsIgnoreCase("FC Barcelona")
                 || this.club.equalsIgnoreCase("Madrid")) ? (short)1 : 0;
         newsRating += (this.player.equalsIgnoreCase("Ferran Torres")
                 || this.player.equalsIgnoreCase("Benzema")) ? (short)1 : 0;

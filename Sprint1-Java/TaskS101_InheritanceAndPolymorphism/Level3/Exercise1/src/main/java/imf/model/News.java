@@ -40,7 +40,7 @@ public abstract class News {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(short rating) {
         this.rating = rating;
     }
 
@@ -54,10 +54,7 @@ public abstract class News {
 
     @Override
     public String toString() {
-        return "\nNews. Headline:" + this.headline +
-                ", text:" + this.text +
-                ", price:" + this.price +
-                ", rating:" + this.rating;
+        return "News headline: " + this.headline + ", text: " + this.text;
     }
 
     public abstract float calculateArticlePrice();
