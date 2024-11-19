@@ -6,119 +6,118 @@ import java.util.ArrayList;
 
 import static imf.controller.MenuUtils.findJournalist;
 import static imf.controller.MenuUtils.idFound;
-import static imf.view.MenuView.keyboardInput;
+import static imf.view.MenuView.*;
+import static imf.view.MenuView.feedbackMessage;
 
 public class MenuController {
     public static ArrayList<Journalist> journalists = new ArrayList<>();
+
     public static String enterJournalist() {
-        String message;
+        String firstPrompt = "Enter the name of the journalist";
+        String secondPrompt = "Enter id number";
         String name;
         String id;
-        System.out.println("Enter the name of the journalist");
-        name = keyboardInput.nextLine();
-        System.out.println("Enter id number");
-        id = keyboardInput.nextLine();
+        String response = "";
+
+        name = enterString(firstPrompt);
+        id = enterString(secondPrompt);
         if (idFound(id)) {
-            message = "This id is already in use\n";
-            showJournalists();
+            response = "This id is already in use\n");
         } else {
             Journalist journalist = new Journalist(name, id);
             journalists.add(journalist);
-            message = "\nJournalist added successfully\n";
-            showJournalists();
+            response = "\nJournalist added successfully\n";
         }
-        return message;
+        showJournalists();
+        return response;
     }
 
     public static String deleteJournalist() {
+        String firstPrompt = "Enter id number";
         String id;
-        String message;
-        System.out.println("Enter id number");
-        id = keyboardInput.nextLine();
+        String response;
+        id = enterString(firstPrompt);
         if (!idFound(id)) {
-            message = "\nId not found\n";
+            response = "\nId not found\n";
         } else {
             journalists.remove(findJournalist(id));
-            message = "\nJournalist deleted successfully\n";
+            response = "\nJournalist deleted successfully\n";
         }
-        return message;
+        return response;
     }
 
     public static String assignNews() {
+        String firstPrompt = "Type the id of the journalist that will be assigned the news item: ";
+        String secondPrompt = "Enter News headline: ";
         String id;
         String headline;
-        int sport;
-        String response = "";
-        System.out.println("Type the id of the journalist that will be assigned the news item: ");
-        id = keyboardInput.nextLine();
+        byte sport;
+        String response = "Couldn't complete the news assignation";
+
+        id = enterString(firstPrompt);
         if (!idFound(id)) {
-            response = "Id not found in the system";
+            response = "ID not found in the system";
         } else {
-            System.out.println("What sport is the news item about?\n" +
-                    "1. Football\n" +
-                    "2. Basketball\n" +
-                    "3. Tennis\n" +
-                    "4. Formula 1\n" +
-                    "5. Motocross\n");
-            sport = keyboardInput.nextInt();
-            keyboardInput.nextLine();
-            System.out.println("News headline:");
-            headline = keyboardInput.nextLine();
+            sport = sportOptionManager();
+            headline = enterString(secondPrompt);
             switch (sport) {
-                case 1:
+                case (byte)1:
                     response = assignFootballNews(id, headline);
                     break;
-                case 2:
+                case (byte)2:
                     response = assignBasketNews(id, headline);
                     break;
-                case 3:
+                case (byte)3:
                     response = assignTennisNews(id, headline);
                     break;
-                case 4:
+                case (byte)4:
                     response = assignFormula1News(id, headline);
                     break;
-                case 5:
+                case (byte)5:
                     response = assignMotocrossNews(id, headline);
+                    break;
+                default:
+                    feedbackMessage("You can only choose options 1-5");
             }
         }
         return response;
     }
 
     public static String assignFootballNews(String id, String headline) {
-        String message = "";
+        String firstPrompt = "Enter the competition";
+        String secondPrompt = "Enter the club";
+        String thirdPrompt = "Enter the player";
         String competition;
         String club;
         String player;
+        String response = "Football news item assigned";
 
-        System.out.println("Competition: ");
-        competition = keyboardInput.nextLine();
-        System.out.println("Club: ");
-        club = keyboardInput.nextLine();
-        System.out.println("Player: ");
-        player = keyboardInput.nextLine();
+        competition = enterString(firstPrompt);
+        club = enterString(secondPrompt);
+        player = enterString(thirdPrompt);
         Journalist journalist = findJournalist(id);
 
         FootballNews footballNews = new FootballNews(headline, journalist, competition, club, player);
         journalist.getNews().add(footballNews);
 
-        return message;
+        return response;
     }
 
     public static String assignBasketNews(String id, String headline) {
-        String message = "";
+        String firstPrompt = "Enter the competition";
+        String secondPrompt = "Enter the club";
         String competition;
         String club;
+        String response = "Basketball news item assigned";
 
-        System.out.println("Competition: ");
-        competition = keyboardInput.nextLine();
-        System.out.println("Club: ");
-        club = keyboardInput.nextLine();
+        competition = enterString(firstPrompt);
+        club = enterString(secondPrompt);
         Journalist journalist = findJournalist(id);
 
         BasketballNews basketballNews = new BasketballNews(headline, journalist, competition, club);
         journalist.getNews().add(basketballNews);
 
-        return message;
+        return response;
     }
 
     public static String assignTennisNews(String id, String headline) {
