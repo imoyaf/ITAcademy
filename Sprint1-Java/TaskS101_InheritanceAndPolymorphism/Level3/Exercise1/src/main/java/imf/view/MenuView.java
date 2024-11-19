@@ -24,6 +24,8 @@ public class MenuView {
     int option;
     String response = "";
 
+    public MenuView() {}
+
     public int userOption() {
         System.out.println(menu);
         option = keyboardInput.nextInt();
@@ -63,7 +65,7 @@ public class MenuView {
         return exit;
     }
 
-    public byte sportOptionManager() {
+    public static byte sportOptionManager() {
         byte sport;
         System.out.println("sportMenu");
         sport = keyboardInput.nextByte();
