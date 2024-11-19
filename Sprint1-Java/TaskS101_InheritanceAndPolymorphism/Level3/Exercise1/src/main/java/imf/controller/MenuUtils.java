@@ -2,6 +2,8 @@ package imf.controller;
 
 import imf.model.Journalist;
 
+import static imf.controller.MenuController.journalists;
+
 public class MenuUtils {
 
     public static boolean idFound(String id) {
