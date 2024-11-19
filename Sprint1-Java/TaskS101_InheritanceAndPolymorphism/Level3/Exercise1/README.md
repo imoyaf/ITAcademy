@@ -7,9 +7,9 @@
 
 In a sports news desk, the news is classified by sports: football, basketball, tennis, F1, and motocross.
 
-The desk can have more than one writer, and for each of them, we want to know their name, ID number, and salary. Once an ID number is assigned, it cannot be changed. All writers have the same salary, and if in the future the company increases the salary, it will apply equally to everyone. For now, the current salary is €1500.
+The desk can have more than one journalist, and for each of them, we want to know their name, ID number, and salary. Once an ID number is assigned, it cannot be changed. All journalists have the same salary, and if in the future the company increases the salary, it will apply equally to everyone. For now, the current salary is €1500.
 
-Each writer can work on more than one article. Articles must have a title, text, a rating, and a price. When an article is created, the text should be empty.
+Each journalist can work on more than one article. Articles must have a title, text, a rating, and a price. When an article is created, the text should be empty.
 
 Additionally, for football articles, we need to know which competition it refers to (String), which club (String), and which player (String).
 
@@ -55,7 +55,7 @@ Example: An article about a goal by Ferran Torres of Barça in the Champions Lea
     Initial price: €100
     Honda or Yamaha: €50
 
-To calculate the rating of the articles, the following criteria are used:
+To calculate the ratings of the articles, the following criteria are used:
 
 **Football articles:**
 
@@ -91,10 +91,10 @@ Example: An article about a goal by Ferran Torres of Barça in the Champions Lea
 
 In the main class, a menu must be created with the following options:
 
-1. Add a writer.
-2. Remove a writer.
-3. Assign an article to a writer.
-4. Remove an article (it should ask for the writer and article title).
-5. Show all articles by a writer.
+1. Add a journalist.
+2. Remove a journalist.
+3. Assign an article to a journalist.
+4. Remove an article (it should ask for the journalist and article title).
+5. Show all articles by a journalist.
 6. Calculate the article’s score.
 7. Calculate the article’s price.
