@@ -1,25 +1,85 @@
 package imf.controller;
 
 import imf.model.*;
+import imf.view.MenuView;
+import imf.view.MenuViewUtils;
 
 import java.util.ArrayList;
 
-import static imf.controller.MenuUtils.*;
-import static imf.view.MenuView.*;
+import static imf.controller.MenuControllerUtils.*;
 
 public class MenuController {
     public static ArrayList<Journalist> journalists = new ArrayList<>();
+    MenuControllerUtils menuControllerUtils = new MenuControllerUtils();
+    MenuView menuView = new MenuView();
+    MenuViewUtils menuViewUtils = new MenuViewUtils();
+    String menu = "------ MENU ------\n"
+            + "1.- Enter journalist\n"
+            + "2.- Delete journalist\n"
+            + "3.- Enter news item for a journalist\n"
+            + "4.- Delete news item\n"
+            + "5.- Show all news items for a journalist\n"
+            + "6.- Calculate news rating\n"
+            + "7.- Calculate news price\n"
+            + "8.- Exit";
+    String sportMenu = "What sport is the news item about?\n" +
+            "1. Football\n" +
+            "2. Basketball\n" +
+            "3. Tennis\n" +
+            "4. Formula 1\n" +
+            "5. Motocross\n";
+    String journoNamePrompt = "Enter the name of the journalist: ";
+    String journoIdNumberPrompt = "Enter Journalist ID number: ";
+    String headlinePrompt = "Enter the news item headline: ";
+    String competitionPrompt = "Enter the competition: ";
+    String clubPrompt = "Enter the club: ";
+    String playerPrompt = "Enter the player name: ";
+    String teamPrompt = "Enter the team name: ";
 
-    public static String enterJournalist() {
-        String firstPrompt = "Enter the name of the journalist";
-        String secondPrompt = "Enter id number";
+    public MenuController() {
+    }
+
+    public void optionManager() {
+        boolean exit = false;
+        while (!exit) {
+            switch (menuView.userOption(menu)) {
+                case (byte) 1 -> enterJournalist();
+                case (byte) 2 -> deleteJournalist();
+                case (byte) 3 -> assignNews();
+                case (byte) 4 -> deleteNews();
+                case (byte) 5 -> findJournalistNews();
+                case (byte) 6 -> newsRating();
+                case (byte) 7 -> newsPrice();
+                case (byte) 8 -> {
+                    exit = true;
+                    menuViewUtils.feedbackMessage("Thank you for using the news manager\n");
+                }
+                default -> menuViewUtils.feedbackMessage("You can only choose options 1-8");
+            }
+        }
+    }
+
+    public void sportOptionManager(String id) {
+        byte sport;
+        sport = menuView.userOption(sportMenu);
+        switch (sport) {
+            case (byte) 1 -> assignFootballNews(id, menuControllerUtils.getHeadlineFromUser());
+            case (byte) 2 -> assignBasketNews(id, menuControllerUtils.getHeadlineFromUser());
+            case (byte) 3 -> assignTennisNews(id, menuControllerUtils.getHeadlineFromUser());
+            case (byte) 4 -> assignFormula1News(id, menuControllerUtils.getHeadlineFromUser());
+            case (byte) 5 -> assignMotocrossNews(id, menuControllerUtils.getHeadlineFromUser());
+            default -> menuViewUtils.feedbackMessage("You can only choose options 1-5");
+        }
+    }
+
+    public void enterJournalist() {
         String name;
         String id;
         String response;
 
-        name = enterString(firstPrompt);
-        id = enterString(secondPrompt);
-        if (idFound(id)) {
+        name = menuViewUtils.enterString(journoNamePrompt);
+        id = menuControllerUtils.getIdFromUser();
+        if (menuControllerUtils.idFound(id)) {
             response = "This id is already in use\n";
         } else {
             Journalist journalist = new Journalist(name, id);
@@ -27,212 +87,171 @@ public class MenuController {
             response = "\nJournalist added successfully\n";
         }
         showJournalists();
-        return response;
+        menuViewUtils.feedbackMessage(response);
     }
 
-    public static String deleteJournalist() {
-        String firstPrompt = "Enter id number";
+    public void deleteJournalist() {
         String id;
         String response;
-        id = enterString(firstPrompt);
-        if (!idFound(id)) {
+        id = menuControllerUtils.getIdFromUser();
+        if (!menuControllerUtils.idFound(id)) {
             response = "\nId not found\n";
         } else {
-            journalists.remove(findJournalist(id));
+            journalists.remove(menuControllerUtils.findJournalist(id));
             response = "\nJournalist deleted successfully\n";
         }
-        return response;
+        menuViewUtils.feedbackMessage(response);
     }
 
-    public static String assignNews() {
-        String firstPrompt = "Type the id of the journalist that will be assigned the news item: ";
-        String secondPrompt = "Enter News headline: ";
+    public void assignNews() {
         String id;
-        String headline;
-        byte sport;
-        String response = "Couldn't complete the news assignation";
+        String response = "";
 
-        id = enterString(firstPrompt);
-        if (!idFound(id)) {
+        id = menuControllerUtils.getIdFromUser();
+        if (!menuControllerUtils.idFound(id)) {
             response = "ID not found in the system";
         } else {
-            sport = sportOptionManager();
-            headline = enterString(secondPrompt);
-            switch (sport) {
-                case (byte)1:
-                    response = assignFootballNews(id, headline);
-                    break;
-                case (byte)2:
-                    response = assignBasketNews(id, headline);
-                    break;
-                case (byte)3:
-                    response = assignTennisNews(id, headline);
-                    break;
-                case (byte)4:
-                    response = assignFormula1News(id, headline);
-                    break;
-                case (byte)5:
-                    response = assignMotocrossNews(id, headline);
-                    break;
-                default:
-                    feedbackMessage("You can only choose options 1-5");
-            }
+            sportOptionManager(id);
         }
-        return response;
+        menuViewUtils.feedbackMessage(response);
     }
 
-    public static String assignFootballNews(String id, String headline) {
-        String firstPrompt = "Enter the competition: ";
-        String secondPrompt = "Enter the club: ";
-        String thirdPrompt = "Enter the player: ";
+    public void assignFootballNews(String id, String headline) {
         String competition;
         String club;
         String player;
 
-        competition = enterString(firstPrompt);
-        club = enterString(secondPrompt);
-        player = enterString(thirdPrompt);
-        Journalist journalist = findJournalist(id);
+        competition = menuViewUtils.enterString(competitionPrompt);
+        club = menuViewUtils.enterString(clubPrompt);
+        player = menuViewUtils.enterString(playerPrompt);
+        Journalist journalist = menuControllerUtils.findJournalist(id);
 
         FootballNews footballNews = new FootballNews(headline, journalist, competition, club, player);
         journalist.getNews().add(footballNews);
 
-        return "Football news item assigned";
+        menuViewUtils.feedbackMessage("Football news item assigned successfully");
     }
 
-    public static String assignBasketNews(String id, String headline) {
-        String firstPrompt = "Enter the competition: ";
-        String secondPrompt = "Enter the club: ";
+    public void assignBasketNews(String id, String headline) {
         String competition;
         String club;
 
-        competition = enterString(firstPrompt);
-        club = enterString(secondPrompt);
-        Journalist journalist = findJournalist(id);
+        competition = menuViewUtils.enterString(competitionPrompt);
+        club = menuViewUtils.enterString(clubPrompt);
+        Journalist journalist = menuControllerUtils.findJournalist(id);
 
         BasketballNews basketballNews = new BasketballNews(headline, journalist, competition, club);
         journalist.getNews().add(basketballNews);
 
-        return "Basketball news item assigned";
+        menuViewUtils.feedbackMessage("Basketball news item assigned successfully");
     }
 
-    public static String assignTennisNews(String id, String headline) {
-        String firstPrompt = "Enter the competition: ";
-        String secondPrompt = "Enter the player: ";
+    public void assignTennisNews(String id, String headline) {
         String competition;
         String player;
 
-        competition = enterString(firstPrompt);
-        player = enterString(secondPrompt);
-        Journalist journalist = findJournalist(id);
+        competition = menuViewUtils.enterString(competitionPrompt);
+        player = menuViewUtils.enterString(playerPrompt);
+        Journalist journalist = menuControllerUtils.findJournalist(id);
 
         TennisNews tennisNews = new TennisNews(headline, journalist, competition, player);
         journalist.getNews().add(tennisNews);
 
-        return "Tennis news item assigned";
+        menuViewUtils.feedbackMessage("Tennis news item assigned successfully");
     }
 
-    public static String assignFormula1News(String id, String headline) {
-        String firstPrompt = "Enter the team: ";
+    public void assignFormula1News(String id, String headline) {
         String team;
 
-        team = enterString(firstPrompt);
-        Journalist journalist = findJournalist(id);
+        team = menuViewUtils.enterString(teamPrompt);
+        Journalist journalist = menuControllerUtils.findJournalist(id);
 
         F1News f1News = new F1News(headline, journalist, team);
         journalist.getNews().add(f1News);
 
-        return "Formula 1 news item assigned";
+        menuViewUtils.feedbackMessage("Formula 1 news item assigned successfully");
     }
 
-    public static String assignMotocrossNews(String id, String headline) {
-        String firstPrompt = "Enter the team: ";
+    public void assignMotocrossNews(String id, String headline) {
         String team;
 
-        team = enterString(firstPrompt);
-        Journalist journalist = findJournalist(id);
+        team = menuViewUtils.enterString(teamPrompt);
+        Journalist journalist = menuControllerUtils.findJournalist(id);
 
         MotocrossNews motocrossNews = new MotocrossNews(headline, journalist, team);
         journalist.getNews().add(motocrossNews);
 
-        return "Motocross news item assigned";
+        menuViewUtils.feedbackMessage("Motocross news item assigned successfully");
     }
 
-    public static String deleteNews() {
-        String firstPrompt = "Enter the journalist id to delete the news item: ";
-        String secondPrompt = "News headline: ";
+    public void deleteNews() {
         String id;
         String headline;
         String response = "Headline not found";
 
-        id = enterString(firstPrompt);
-        if (!idFound(id)) {
+        id = menuViewUtils.enterString(journoIdNumberPrompt);
+        if (!menuControllerUtils.idFound(id)) {
             response = "ID not found in the system";
         } else {
-            headline = enterString(secondPrompt);
-            for (int i = 0; i < findJournalist(id).getNews().size(); i++) {
-                if (findJournalist(id).getNews().get(i).getHeadline().equalsIgnoreCase(headline)) {
-                    findJournalist(id).getNews().remove(i);
+            headline = menuViewUtils.enterString(headlinePrompt);
+            for (int i = 0; i < menuControllerUtils.findJournalist(id).getNews().size(); i++) {
+                if (menuControllerUtils.findJournalist(id).getNews().get(i).getHeadline().equalsIgnoreCase(headline)) {
+                    menuControllerUtils.findJournalist(id).getNews().remove(i);
                     response = "News item deleted successfully";
-                } else {
-                    response = "Headline not found";
                 }
             }
         }
-        return response;
+        menuViewUtils.feedbackMessage(response);
     }
 
-    public static String findJournalistNews() {
+    public void findJournalistNews() {
         String response;
         String id;
 
-        id = enterString("Enter the journalist id to show their news: ");
-        if (!idFound(id)) {
+        id = menuViewUtils.enterString("Enter the journalist id to show their news: ");
+        if (!menuControllerUtils.idFound(id)) {
             response = "Id not found";
         } else {
-            response = findJournalist(id).getNews().toString();
+            response = menuControllerUtils.findJournalist(id).getNews().toString();
         }
-        return response;
+        menuViewUtils.feedbackMessage(response);
     }
 
-    public static String newsRating() {
+    public void newsRating() {
         String id;
         String headline;
         String response = "Headline not found";
 
-        id = enterString("Enter the journalist id for the news item: ");
-        if (!idFound(id)) {
+        id = menuViewUtils.enterString("Enter the journalist id for the news item: ");
+        if (!menuControllerUtils.idFound(id)) {
             response = "Id not found";
         } else {
-            headline = enterString("News headline: ");
-            for (int i = 0; i < findJournalist(id).getNews().size(); i++) {
-                if (findJournalist(id).getNews().get(i).getHeadline().equalsIgnoreCase(headline)) {
-                    response = "News rating: " + findJournalist(id).getNews().get(i).calculateNewsRating();
-                } else {
-                    response = "Headline not found";
+            headline = menuViewUtils.enterString("News headline: ");
+            for (int i = 0; i < menuControllerUtils.findJournalist(id).getNews().size(); i++) {
+                if (menuControllerUtils.findJournalist(id).getNews().get(i).getHeadline().equalsIgnoreCase(headline)) {
+                    response = "News rating: " + menuControllerUtils.findJournalist(id).getNews().get(i).calculateNewsRating();
                 }
             }
         }
-        return response;
+        menuViewUtils.feedbackMessage(response);
     }
 
-    public static String newsPrice() {
+    public void newsPrice() {
         String id;
         String headline;
         String response = "Headline not found";
 
-        id = enterString("Enter the journalist id for the news item: ");
-        if (!idFound(id)) {
+        id = menuViewUtils.enterString("Enter the journalist id for the news item: ");
+        if (!menuControllerUtils.idFound(id)) {
             response = "Id not found";
         } else {
-            headline = enterString("News headline: ");
-            for (int i = 0; i < findJournalist(id).getNews().size(); i++) {
-                if (findJournalist(id).getNews().get(i).getHeadline().equalsIgnoreCase(headline)) {
-                    response = "News item price: " + findJournalist(id).getNews().get(i).calculateArticlePrice();
+            headline = menuViewUtils.enterString("News headline: ");
+            for (int i = 0; i < menuControllerUtils.findJournalist(id).getNews().size(); i++) {
+                if (menuControllerUtils.findJournalist(id).getNews().get(i).getHeadline().equalsIgnoreCase(headline)) {
+                    response = "News item price: " + menuControllerUtils.findJournalist(id).getNews().get(i).calculateArticlePrice();
                 }
             }
         }
-        return response;
+        menuViewUtils.feedbackMessage(response);
     }
-
 }

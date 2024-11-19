@@ -1,10 +1,22 @@
 package imf.controller;
 
 import imf.model.Journalist;
+import imf.view.MenuViewUtils;
 
 import static imf.controller.MenuController.journalists;
 
-public class MenuUtils {
+public class MenuControllerUtils {
+    MenuViewUtils menuViewUtils = new MenuViewUtils();
+
+    public MenuControllerUtils() {}
+
+    public String getIdFromUser() {
+        return menuViewUtils.enterString("Enter Journalist ID number: ");
+    }
+
+    public String getHeadlineFromUser() {
+        return menuViewUtils.enterString("Enter the news item headline: ");
+    }
 
     public boolean idFound(String id) {
         boolean idFound = false;
