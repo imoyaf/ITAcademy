@@ -4,10 +4,8 @@ import imf.model.*;
 
 import java.util.ArrayList;
 
-import static imf.controller.MenuUtils.findJournalist;
-import static imf.controller.MenuUtils.idFound;
+import static imf.controller.MenuUtils.*;
 import static imf.view.MenuView.*;
-import static imf.view.MenuView.feedbackMessage;
 
 public class MenuController {
     public static ArrayList<Journalist> journalists = new ArrayList<>();
@@ -17,12 +15,12 @@ public class MenuController {
         String secondPrompt = "Enter id number";
         String name;
         String id;
-        String response = "";
+        String response;
 
         name = enterString(firstPrompt);
         id = enterString(secondPrompt);
         if (idFound(id)) {
-            response = "This id is already in use\n");
+            response = "This id is already in use\n";
         } else {
             Journalist journalist = new Journalist(name, id);
             journalists.add(journalist);
@@ -84,13 +82,12 @@ public class MenuController {
     }
 
     public static String assignFootballNews(String id, String headline) {
-        String firstPrompt = "Enter the competition";
-        String secondPrompt = "Enter the club";
-        String thirdPrompt = "Enter the player";
+        String firstPrompt = "Enter the competition: ";
+        String secondPrompt = "Enter the club: ";
+        String thirdPrompt = "Enter the player: ";
         String competition;
         String club;
         String player;
-        String response = "Football news item assigned";
 
         competition = enterString(firstPrompt);
         club = enterString(secondPrompt);
@@ -100,15 +97,14 @@ public class MenuController {
         FootballNews footballNews = new FootballNews(headline, journalist, competition, club, player);
         journalist.getNews().add(footballNews);
 
-        return response;
+        return "Football news item assigned";
     }
 
     public static String assignBasketNews(String id, String headline) {
-        String firstPrompt = "Enter the competition";
-        String secondPrompt = "Enter the club";
+        String firstPrompt = "Enter the competition: ";
+        String secondPrompt = "Enter the club: ";
         String competition;
         String club;
-        String response = "Basketball news item assigned";
 
         competition = enterString(firstPrompt);
         club = enterString(secondPrompt);
@@ -117,132 +113,126 @@ public class MenuController {
         BasketballNews basketballNews = new BasketballNews(headline, journalist, competition, club);
         journalist.getNews().add(basketballNews);
 
-        return response;
+        return "Basketball news item assigned";
     }
 
     public static String assignTennisNews(String id, String headline) {
-        String message = "";
+        String firstPrompt = "Enter the competition: ";
+        String secondPrompt = "Enter the player: ";
         String competition;
         String player;
 
-        System.out.println("Competition: ");
-        competition = keyboardInput.nextLine();
-        System.out.println("Player: ");
-        player = keyboardInput.nextLine();
+        competition = enterString(firstPrompt);
+        player = enterString(secondPrompt);
         Journalist journalist = findJournalist(id);
 
         TennisNews tennisNews = new TennisNews(headline, journalist, competition, player);
         journalist.getNews().add(tennisNews);
 
-        return message;
+        return "Tennis news item assigned";
     }
 
     public static String assignFormula1News(String id, String headline) {
-        String message = "";
+        String firstPrompt = "Enter the team: ";
         String team;
 
-        System.out.println("Team: ");
-        team = keyboardInput.nextLine();
+        team = enterString(firstPrompt);
         Journalist journalist = findJournalist(id);
 
         F1News f1News = new F1News(headline, journalist, team);
         journalist.getNews().add(f1News);
 
-        return message;
+        return "Formula 1 news item assigned";
     }
 
     public static String assignMotocrossNews(String id, String headline) {
-        String message = "";
-        String equip;
+        String firstPrompt = "Enter the team: ";
+        String team;
 
-        System.out.println("Equip: ");
-        equip = keyboardInput.nextLine();
+        team = enterString(firstPrompt);
         Journalist journalist = findJournalist(id);
 
-        MotocrossNews motocrossNews = new MotocrossNews(headline, journalist, equip);
+        MotocrossNews motocrossNews = new MotocrossNews(headline, journalist, team);
         journalist.getNews().add(motocrossNews);
 
-        return message;
+        return "Motocross news item assigned";
     }
 
     public static String deleteNews() {
-        String message = "Headline not found";
+        String firstPrompt = "Enter the journalist id to delete the news item: ";
+        String secondPrompt = "News headline: ";
         String id;
         String headline;
-        System.out.println("Enter the journalist id to delete the news item: ");
-        id = keyboardInput.nextLine();
+        String response = "Headline not found";
+
+        id = enterString(firstPrompt);
         if (!idFound(id)) {
-            System.out.println("Id not found");
+            response = "ID not found in the system";
         } else {
-            System.out.println("News headline: ");
-            headline = keyboardInput.nextLine();
+            headline = enterString(secondPrompt);
             for (int i = 0; i < findJournalist(id).getNews().size(); i++) {
                 if (findJournalist(id).getNews().get(i).getHeadline().equalsIgnoreCase(headline)) {
                     findJournalist(id).getNews().remove(i);
-                    message = "News item deleted successfully";
+                    response = "News item deleted successfully";
+                } else {
+                    response = "Headline not found";
                 }
             }
         }
-        return message;
+        return response;
     }
 
     public static String findJournalistNews() {
-        String message;
+        String response;
         String id;
-        System.out.println("Enter the journalist id to show their news: ");
-        id = keyboardInput.nextLine();
+
+        id = enterString("Enter the journalist id to show their news: ");
         if (!idFound(id)) {
-            message = "Id not found";
+            response = "Id not found";
         } else {
-            message = findJournalist(id).getNews().toString();
+            response = findJournalist(id).getNews().toString();
         }
-        return message;
+        return response;
     }
 
     public static String newsRating() {
-        String message = "Headline not found";
         String id;
         String headline;
-        System.out.println("Enter the journalist id for the news item: ");
-        id = keyboardInput.nextLine();
+        String response = "Headline not found";
+
+        id = enterString("Enter the journalist id for the news item: ");
         if (!idFound(id)) {
-            message = "Id not found";
+            response = "Id not found";
         } else {
-            System.out.println("News headline: ");
-            headline = keyboardInput.nextLine();
+            headline = enterString("News headline: ");
             for (int i = 0; i < findJournalist(id).getNews().size(); i++) {
                 if (findJournalist(id).getNews().get(i).getHeadline().equalsIgnoreCase(headline)) {
-                    message = "News rating: " + findJournalist(id).getNews().get(i).calculateNewsRating();
+                    response = "News rating: " + findJournalist(id).getNews().get(i).calculateNewsRating();
+                } else {
+                    response = "Headline not found";
                 }
             }
         }
-        return message;
+        return response;
     }
 
     public static String newsPrice() {
-        String message = "Headline not found";
         String id;
         String headline;
-        System.out.println("Enter the journalist id for the news item: ");
-        id = keyboardInput.nextLine();
+        String response = "Headline not found";
+
+        id = enterString("Enter the journalist id for the news item: ");
         if (!idFound(id)) {
-            message = "Id not found";
+            response = "Id not found";
         } else {
-            System.out.println("News headline: ");
-            headline = keyboardInput.nextLine();
+            headline = enterString("News headline: ");
             for (int i = 0; i < findJournalist(id).getNews().size(); i++) {
                 if (findJournalist(id).getNews().get(i).getHeadline().equalsIgnoreCase(headline)) {
-                    message = "News item price: " + findJournalist(id).getNews().get(i).calculateArticlePrice();
+                    response = "News item price: " + findJournalist(id).getNews().get(i).calculateArticlePrice();
                 }
             }
         }
-        return message;
-    }
-
-    public static void showJournalists() {
-        for (Journalist element : journalists) {
-            System.out.println(element.toString());
-        }
+        return response;
     }
 
 }

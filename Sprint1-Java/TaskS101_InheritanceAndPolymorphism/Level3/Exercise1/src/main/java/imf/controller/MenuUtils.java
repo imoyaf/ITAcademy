@@ -28,4 +28,10 @@ public class MenuUtils {
         return journalist;
     }
 
+    public static void showJournalists() {
+        for (Journalist element : journalists) {
+            System.out.println(element.toString());
+        }
+    }
+
 }
