@@ -1,10 +1,10 @@
 package imf;
 
-import imf.view.MenuView;
+import imf.controller.MenuController;
 
 public class Main {
     public static void main(String[] args) {
-        MenuView menuView = new MenuView();
-        menuView.run();
+        MenuController menuController = new MenuController();
+        menuController.optionManager();
     }
 }
