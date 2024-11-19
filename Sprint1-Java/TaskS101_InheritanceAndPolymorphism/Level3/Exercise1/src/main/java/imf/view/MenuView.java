@@ -15,6 +15,12 @@ public class MenuView {
             + "6.- Calculate news rating\n"
             + "7.- Calculate news price\n"
             + "8.- Exit";
+    String sportMenu = "What sport is the news item about?\n" +
+            "1. Football\n" +
+            "2. Basketball\n" +
+            "3. Tennis\n" +
+            "4. Formula 1\n" +
+            "5. Motocross\n");
     int option;
     String response = "";
 
@@ -55,6 +61,25 @@ public class MenuView {
                 System.out.println("Please choose a correct option");
         }
         return exit;
+    }
+
+    public byte sportOptionManager() {
+        byte sport;
+        System.out.println("sportMenu");
+        sport = keyboardInput.nextByte();
+        keyboardInput.nextLine();
+
+        return sport;
+    }
+
+    public static String enterString(String prompt) {
+        System.out.println(prompt);
+        String input = keyboardInput.nextLine();
+        return input;
+    }
+
+    public static void feedbackMessage(String message) {
+        System.out.println(message);
     }
 
     public void run() {
